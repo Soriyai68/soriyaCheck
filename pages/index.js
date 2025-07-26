@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <div>
       <div className="lookup-card">
-        <h1 className="lookup-title">📱 កម្មវិធីស្វែងរកលេខទូរស័ព្ទកម្ពុជា</h1>
+        <h1 className="lookup-title">កម្មវិធីស្វែងរកលេខទូរស័ព្ទកម្ពុជា</h1>
         <form onSubmit={handleSubmit} className="lookup-form">
           <label htmlFor="phone_number">លេខទូរស័ព្ទ</label>
           <input
