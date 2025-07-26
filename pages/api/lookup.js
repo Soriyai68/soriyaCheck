@@ -8,6 +8,8 @@ export default function handler(req, res) {
   }
   const { phone_number } = req.body;
   let number = phone_number;
+  // Remove all spaces and non-digit characters except leading +
+  number = number.replace(/[^\d+]/g, '');
   if (number.startsWith('0') && !number.startsWith('+')) {
     number = '+855' + number.slice(1);
   }
@@ -25,7 +27,7 @@ export default function handler(req, res) {
       // google-libphonenumber does not provide carrier by default, so we use prefix mapping
       const prefix = number.replace('+855', '').substring(0, 2);
       const carrierMap = {
-        '10': 'Cellcard', '11': 'Cellcard', '12': 'Cellcard', '13': 'Cellcard', '14': 'Cellcard', '15': 'Cellcard', '16': 'Smart', '17': 'Cellcard', '18': 'Smart', '60': 'Smart', '61': 'Smart', '66': 'Smart', '67': 'Smart', '68': 'Smart', '69': 'Smart', '70': 'Metfone', '71': 'Metfone', '77': 'Metfone', '78': 'Metfone', '79': 'Metfone', '81': 'Smart', '85': 'Cellcard', '86': 'Smart', '87': 'Smart', '88': 'Smart', '89': 'Smart', '90': 'Cellcard', '92': 'Cellcard', '93': 'Cellcard', '95': 'Cellcard', '96': 'Smart', '97': 'Metfone', '98': 'Cellcard', '99': 'Smart'
+        '10': 'Cellcard', '11': 'Cellcard', '12': 'Cellcard', '13': 'Cellcard', '14': 'Cellcard', '15': 'Cellcard', '16': 'Smart', '17': 'Cellcard', '18': 'Smart', '60': 'Smart', '61': 'Smart', '66': 'Smart', '67': 'Smart', '68': 'Smart', '69': 'Smart', '70': 'Metfone', '71': 'Metfone', '77': 'Metfone', '78': 'Metfone', '79': 'Metfone', '81': 'Smart', '85': 'Cellcard', '86': 'Cellcard', '87': 'Smart', '88': 'Smart', '89': 'Smart', '90': 'Cellcard', '92': 'Cellcard', '93': 'Cellcard', '95': 'Cellcard', '96': 'Smart', '97': 'Metfone', '98': 'Cellcard', '99': 'Smart'
       };
       if (carrierMap[prefix]) provider = carrierMap[prefix];
     } catch {}
